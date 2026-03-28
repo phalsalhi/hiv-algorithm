@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIV Treatment Algorithm</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--color-background-primary:#ffffff;
+--color-background-secondary:#f5f4f0;
+--color-text-primary:#1a1a18;
+--color-text-secondary:#6b6a65;
+--color-text-tertiary:#9c9a92;
+--color-border-tertiary:rgba(0,0,0,0.12);
+--color-border-secondary:rgba(0,0,0,0.22);
+--color-border-primary:rgba(0,0,0,0.35);
+--font-sans:system-ui,-apple-system,sans-serif;
+--border-radius-md:8px;
+--border-radius-lg:12px;
+}
+@media(prefers-color-scheme:dark){
+:root{
+--color-background-primary:#1e1e1c;
+--color-background-secondary:#2a2a28;
+--color-text-primary:#e8e6df;
+--color-text-secondary:#9c9a92;
+--color-text-tertiary:#6b6a65;
+--color-border-tertiary:rgba(255,255,255,0.10);
+--color-border-secondary:rgba(255,255,255,0.18);
+--color-border-primary:rgba(255,255,255,0.30);
+}
+}
+body{
+font-family:var(--font-sans);
+background:var(--color-background-secondary);
+color:var(--color-text-primary);
+min-height:100vh;
+padding:1.5rem 1rem;
+}
+.page{max-width:780px;margin:0 auto}
+.header{margin-bottom:1.5rem}
+.header h1{font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.header p{font-size:13px;color:var(--color-text-secondary)}
+.wrap{padding:.5rem 0}
+.step-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem}
+.step-btn{font-size:12px;padding:5px 10px;border:0.5px solid var(--color-border-secondary);border-radius:6px;background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer;transition:all .15s;font-family:var(--font-sans)}
+.step-btn:hover{background:var(--color-background-primary);color:var(--color-text-primary)}
+.step-btn.active{background:var(--color-background-primary);border-color:var(--color-border-primary);color:var(--color-text-primary);font-weight:500}
+.step-btn.s0{border-left:3px solid #888}
+.step-btn.s1{border-left:3px solid #3B8BD4}
+.step-btn.s2{border-left:3px solid #EF9F27}
+.step-btn.s3{border-left:3px solid #8B5CF6}
+.step-btn.s4{border-left:3px solid #1D9E75}
+.step-btn.s5{border-left:3px solid #3B8BD4}
+.step-btn.s6{border-left:3px solid #E24B4A}
+.step-btn.s7{border-left:3px solid #2C2C2A}
+.step-btn.s-preg{border-left:3px solid #D4537E}
+.step-btn.s-iris{border-left:3px solid #EF9F27}
+.step-btn.s-mem{border-left:3px solid #8B5CF6}
+.panel{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:1.25rem;display:none}
+.panel.active{display:block}
+.panel-header{display:flex;align-items:flex-start;gap:10px;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.step-badge{font-size:11px;font-weight:500;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.b-gray{background:#E8E6DF;color:#3d3b36}
+.b-blue{background:#B5D4F4;color:#0C447C}
+.b-amber{background:#FAC775;color:#633806}
+.b-purple{background:#CECBF6;color:#3C3489}
+.b-teal{background:#9FE1CB;color:#085041}
+.b-red{background:#F7C1C1;color:#791F1F}
+.b-dark{background:#444;color:#eee}
+.b-pink{background:#F4C0D1;color:#72243E}
+.b-amber2{background:#FAC775;color:#633806}
+@media(prefers-color-scheme:dark){
+.b-gray{background:#444441;color:#D3D1C7}
+.b-blue{background:#0C447C;color:#B5D4F4}
+.b-amber{background:#633806;color:#FAC775}
+.b-purple{background:#3C3489;color:#CECBF6}
+.b-teal{background:#085041;color:#9FE1CB}
+.b-red{background:#791F1F;color:#F7C1C1}
+.b-dark{background:#222;color:#ccc}
+.b-pink{background:#72243E;color:#F4C0D1}
+.b-amber2{background:#633806;color:#FAC775}
+}
+.panel-title{font-size:16px;font-weight:500;color:var(--color-text-primary)}
+.panel-sub{font-size:13px;color:var(--color-text-secondary);margin-top:2px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px;margin-bottom:.75rem}
+.card{background:var(--color-background-secondary);border-radius:8px;padding:.75rem;border:0.5px solid var(--color-border-tertiary)}
+.card-label{font-size:11px;color:var(--color-text-tertiary);font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:.03em}
+.card-val{font-size:13px;color:var(--color-text-primary);line-height:1.5}
+.tag{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:2px 2px 2px 0;font-weight:500}
+.tag-if{background:#E6F1FB;color:#185FA5}
+.tag-then{background:#EAF3DE;color:#3B6D11}
+.tag-warn{background:#FCEBEB;color:#A32D2D}
+.tag-note{background:#EEEDFE;color:#534AB7}
+.tag-pink{background:#FBEAF0;color:#72243E}
+@media(prefers-color-scheme:dark){
+.tag-if{background:#0C447C;color:#B5D4F4}
+.tag-then{background:#27500A;color:#C0DD97}
+.tag-warn{background:#791F1F;color:#F7C1C1}
+.tag-note{background:#3C3489;color:#CECBF6}
+.tag-pink{background:#72243E;color:#F4C0D1}
+}
+.block{margin-bottom:.75rem}
+.block:last-child{margin-bottom:0}
+.block-label{font-size:11px;font-weight:500;color:var(--color-text-tertiary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.03em}
+.block-body{font-size:13px;color:var(--color-text-primary);line-height:1.6}
+.sub-tabs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:.75rem}
+.sub-tab{font-size:12px;padding:4px 10px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:all .15s;font-family:var(--font-sans)}
+.sub-tab.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+.sub-panel{display:none}.sub-panel.active{display:block}
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin:.35rem 0}
+.pill{font-size:12px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);background:var(--color-background-secondary)}
+.pill.hi{background:#B5D4F4;color:#0C447C;border-color:#85B7EB}
+.pill.hi2{background:#9FE1CB;color:#085041;border-color:#5DCAA5}
+.pill.warn{background:#F7C1C1;color:#791F1F;border-color:#F09595}
+.pill.avoid{background:#F7C1C1;color:#791F1F;border-color:#F09595;text-decoration:line-through}
+.pill.pink{background:#F4C0D1;color:#72243E;border-color:#ED93B1}
+@media(prefers-color-scheme:dark){
+.pill.hi{background:#0C447C;color:#B5D4F4}
+.pill.hi2{background:#085041;color:#9FE1CB}
+.pill.warn{background:#791F1F;color:#F7C1C1}
+.pill.avoid{background:#791F1F;color:#F7C1C1}
+.pill.pink{background:#72243E;color:#F4C0D1}
+}
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:.75rem 0}
+.mem-box{background:var(--color-background-secondary);border-left:3px solid #8B5CF6;border-radius:0 8px 8px 0;padding:.75rem;font-size:13px;color:var(--color-text-primary);line-height:1.7}
+.mem-box ol{padding-left:1.2rem;margin:0}
+.mem-box li{margin-bottom:.3rem}
+.iris-risk-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:.5rem 0}
+@media(max-width:500px){.iris-risk-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="header">
+<h1>HIV Treatment Algorithm</h1>
+<p>Guideline-aligned · IF → THEN → WHY logic · Click any step to navigate</p>
+</div>
+<div class="wrap">
+<div class="step-nav" id="nav"></div>
+<div id="panels"></div>
+</div>
+</div>
+<script>
+const steps=[
+{id:0,navClass:'s0',badge:"Step 0",bclass:"b-gray",title:"Baseline workup",sub:"Confirm diagnosis — order everything before treating",content:`
+<div class="card-grid">
+<div class="card"><div class="card-label">Confirm HIV</div><div class="card-val">HIV Ag/Ab + differentiation assay</div></div>
+<div class="card"><div class="card-label">Viral load & immunity</div><div class="card-val">HIV RNA (VL) + CD4 count</div></div>
+<div class="card"><div class="card-label">Resistance</div><div class="card-val">Genotype: RT + protease ± integrase</div></div>
+<div class="card"><div class="card-label">Coinfections</div><div class="card-val">HBsAg, anti-HBc, anti-HBs, HCV Ab</div></div>
+<div class="card"><div class="card-label">Safety labs</div><div class="card-val">CBC, eGFR, LFTs, glucose/HbA1c, lipids</div></div>
+<div class="card"><div class="card-label">If relevant</div><div class="card-val">Pregnancy test</div></div>
+</div>
+<div class="block"><div class="block-label">TB screen — always</div><div class="block-body">Symptom screen + CXR ± IGRA/TST regardless of CD4</div></div>
+<div class="block"><div class="block-label">If CD4 &lt;100</div><div class="pill-row"><span class="pill warn">Cryptococcal antigen (CrAg)</span><span class="pill warn">Toxoplasma IgG</span></div></div>
+`},
+{id:1,navClass:'s1',badge:"Step 1",bclass:"b-blue",title:"Start ART",sub:"INSTI-based — immediately in most patients",content:`
+<div class="block"><div class="block-label">Default first-line</div>
+<div class="pill-row"><span class="pill hi">Bictegravir / FTC / TAF (BIC/FTC/TAF)</span></div>
+<div class="pill-row"><span class="pill hi">Dolutegravir + (TAF or TDF) + (FTC or 3TC)</span></div>
+</div>
+<div class="card" style="margin-bottom:.75rem"><div class="card-label">Why INSTI?</div><div class="card-val">Highest resistance barrier · fast suppression · best tolerability</div></div>
+<hr class="divider">
+<div class="block"><div class="block-label"><span class="tag tag-warn">⚠ Delay ART only if</span></div>
+<div class="block-body" style="margin-top:.4rem">Suspected CNS OI — cryptococcal meningitis or TB meningitis<br>
+<span style="color:var(--color-text-secondary);font-size:12px;display:block;margin-top:4px">Do: CrAg · LP · brain imaging → then start ART after stabilisation</span>
+<span style="color:var(--color-text-secondary);font-size:12px">Delay 2–10 weeks (CM) / ≥2 weeks (TBM) to reduce severe IRIS risk</span>
+</div></div>
+<hr class="divider">
+<div class="block"><div class="block-label"><span class="tag tag-pink">See also</span> IRIS beyond CNS OIs</div>
+<div class="block-body" style="font-size:12px;color:var(--color-text-secondary);margin-top:.3rem">Any active OI at ART initiation carries IRIS risk — see the dedicated IRIS node for full guidance</div></div>
+`},
+{id:2,navClass:'s2',badge:"Step 2",bclass:"b-amber",title:"Check HBV",sub:"Must do before finalising regimen",content:`
+<div class="block"><div class="block-label"><span class="tag tag-if">IF</span> HBsAg positive</div>
+<div class="block-body" style="margin-top:.4rem">
+<span class="tag tag-then">MUST include</span> tenofovir (TAF or TDF) + FTC or 3TC<br>
+<span class="tag tag-warn">AVOID</span> DTG/3TC dual therapy alone
+</div></div>
+<div class="card"><div class="card-label">Why?</div><div class="card-val">Need dual HBV-active agents to prevent HBV flare on ART initiation or discontinuation</div></div>
+`},
+{id:3,navClass:'s3',badge:"Step 3",bclass:"b-purple",title:"Modify for conditions",sub:"TB · Renal · HLA · 2-drug · INSTI intolerance",content:`
+<div class="sub-tabs">
+<button class="sub-tab active" onclick="showSub(this,'s3a')">TB + rifampin</button>
+<button class="sub-tab" onclick="showSub(this,'s3b')">Renal (eGFR &lt;30)</button>
+<button class="sub-tab" onclick="showSub(this,'s3c')">HLA-B*5701</button>
+<button class="sub-tab" onclick="showSub(this,'s3d')">2-drug DTG/3TC</button>
+<button class="sub-tab" onclick="showSub(this,'s3e')">INSTI intolerance</button>
+</div>
+<div id="s3a" class="sub-panel active">
+<div class="block-label"><span class="tag tag-if">IF</span> TB treatment with rifampin</div>
+<div class="block-body" style="margin:.4rem 0"><span class="pill avoid">Bictegravir — avoid</span><br><br>
+<span class="tag tag-then">USE</span>
+<div class="pill-row"><span class="pill hi">Dolutegravir (dose-adjusted: 50 mg BID)</span><span class="pill">Boosted darunavir-based regimen</span></div>
+</div>
+<div class="card" style="margin-top:.5rem"><div class="card-label">Why?</div><div class="card-val">Rifampin is a potent inducer → ↓ INSTI levels → virological failure risk</div></div>
+</div>
+<div id="s3b" class="sub-panel">
+<div class="block-label"><span class="tag tag-if">IF</span> eGFR &lt;30</div>
+<div class="block-body" style="margin:.4rem 0"><span class="pill avoid">Tenofovir (TDF/TAF) — avoid</span><br><br>
+<span class="tag tag-then">USE</span>
+<div class="pill-row"><span class="pill hi">Abacavir-based regimen (only if HLA-B*5701 negative)</span></div>
+</div>
+<div class="card" style="margin-top:.5rem"><div class="card-label">Why?</div><div class="card-val">Tenofovir accumulates in renal impairment → nephrotoxicity</div></div>
+</div>
+<div id="s3c" class="sub-panel">
+<div class="block-label"><span class="tag tag-if">IF</span> HLA-B*5701 positive</div>
+<div class="block-body" style="margin:.4rem 0"><span class="pill avoid">Abacavir — absolute contraindication</span><br>
+<span style="font-size:12px;color:var(--color-text-secondary)">Test before any abacavir exposure — hypersensitivity reaction is life-threatening and irreversible</span>
+</div>
+</div>
+<div id="s3d" class="sub-panel">
+<div class="block-label"><span class="tag tag-if">IF</span> considering DTG/3TC dual therapy</div>
+<div class="block-body" style="margin:.4rem 0"><span class="tag tag-then">ONLY if all 3 conditions met:</span>
+<div class="pill-row"><span class="pill">HIV RNA &lt;500,000</span><span class="pill">No HBV coinfection</span><span class="pill">Genotype available</span></div>
+</div>
+<div class="card" style="margin-top:.5rem"><div class="card-label">Why?</div><div class="card-val">Without these conditions the resistance barrier of 2-drug therapy is insufficient for reliable suppression</div></div>
+</div>
+<div id="s3e" class="sub-panel">
+<div class="block-label"><span class="tag tag-if">IF</span> cannot tolerate INSTI (neuropsychiatric, weight gain)</div>
+<div class="block-body" style="margin:.4rem 0"><span class="tag tag-then">USE</span>
+<div class="pill-row"><span class="pill">NNRTI-based (e.g. Odefsey / rilpivirine-FTC-TAF)</span><span class="pill">PI-based regimen</span></div>
+</div>
+</div>
+`},
+{id:4,navClass:'s4',badge:"Step 4",bclass:"b-teal",title:"OI prophylaxis",sub:"CD4 count drives every decision here",content:`
+<div class="card-grid" style="grid-template-columns:1fr;gap:8px">
+<div class="card" style="border-left:3px solid #E24B4A"><div class="card-label">CD4 &lt;200</div><div class="card-val"><strong style="font-weight:500">PCP prophylaxis</strong> — TMP-SMX daily<br><span style="font-size:12px;color:var(--color-text-secondary)">Stop when CD4 ≥200 for ≥3 months</span></div></div>
+<div class="card" style="border-left:3px solid #EF9F27"><div class="card-label">CD4 &lt;100 + Toxo IgG positive</div><div class="card-val"><strong style="font-weight:500">Toxoplasmosis prophylaxis</strong> — TMP-SMX daily<br><span style="font-size:12px;color:var(--color-text-secondary)">Same drug covers PCP too · stop at CD4 ≥200 ×3 months</span></div></div>
+<div class="card" style="border-left:3px solid #888"><div class="card-label">CD4 &lt;50 (only if ART delayed)</div><div class="card-val"><strong style="font-weight:500">MAC prophylaxis</strong> — Azithromycin weekly<br><span style="font-size:12px;color:var(--color-text-secondary)">Skip if ART started promptly — effective ART removes the need · stop at CD4 &gt;100 ×3 months</span></div></div>
+<div class="card" style="border-left:3px solid #3B8BD4"><div class="card-label">Latent TB — any CD4</div><div class="card-val"><strong style="font-weight:500">LTBI treatment</strong> if IGRA/TST positive<br><span style="font-size:12px;color:var(--color-text-secondary)">Regimen choice depends on drug interactions with ART</span></div></div>
+</div>
+`},
+{id:5,navClass:'s5',badge:"Step 5",bclass:"b-blue",title:"Monitoring",sub:"Track suppression and safety",content:`
+<div class="card-grid">
+<div class="card"><div class="card-label">4–8 weeks</div><div class="card-val">HIV RNA — expect rapid decline</div></div>
+<div class="card"><div class="card-label">Every 3–6 months</div><div class="card-val">HIV RNA + CD4 (until stable &gt;300–500)</div></div>
+<div class="card"><div class="card-label">Safety labs</div><div class="card-val">eGFR + LFTs per regimen</div></div>
+</div>
+`},
+{id:6,navClass:'s6',badge:"Step 6",bclass:"b-red",title:"Define failure",sub:"Triggers investigation",content:`
+<div class="card-grid">
+<div class="card" style="border-color:#F09595"><div class="card-label">Virological failure</div><div class="card-val">HIV RNA &gt;200 copies/mL after confirmed suppression</div></div>
+<div class="card" style="border-color:#F09595"><div class="card-label">Non-suppression</div><div class="card-val">No suppression by ~24 weeks on therapy</div></div>
+</div>
+<div class="block"><div class="block-body" style="font-size:12px;color:var(--color-text-secondary)">Confirm with a repeat VL before acting — transient blips (50–200) may not require regimen change</div></div>
+`},
+{id:7,navClass:'s7',badge:"Step 7",bclass:"b-dark",title:"Failure algorithm",sub:"Adherence → resistance → escalate",content:`
+<div class="sub-tabs">
+<button class="sub-tab active" onclick="showSub(this,'s7a')">7A — First check</button>
+<button class="sub-tab" onclick="showSub(this,'s7b')">7B — Resistance test</button>
+<button class="sub-tab" onclick="showSub(this,'s7c')">7C — No resistance</button>
+<button class="sub-tab" onclick="showSub(this,'s7d')">7D — Resistance found</button>
+<button class="sub-tab" onclick="showSub(this,'s7e')">7E — INSTI resistance</button>
+<button class="sub-tab" onclick="showSub(this,'s7f')">7F — Multi-drug</button>
+</div>
+<div id="s7a" class="sub-panel active">
+<div class="block-label">Before anything else</div>
+<div class="pill-row"><span class="pill">Adherence assessment</span><span class="pill">Drug interactions review</span><span class="pill">Dosing check</span></div>
+<div class="card" style="margin-top:.5rem"><div class="card-label">Why first?</div><div class="card-val">Most virological failures are adherence-related — resistance testing while non-adherent wastes resources and may mislead</div></div>
+</div>
+<div id="s7b" class="sub-panel">
+<div class="block-body">Order genotype resistance test while patient is still on the failing regimen<br><span style="font-size:12px;color:var(--color-text-secondary)">Mutations become undetectable after regimen is stopped — test on-drug</span></div>
+</div>
+<div id="s7c" class="sub-panel">
+<div class="block-label"><span class="tag tag-if">IF</span> no resistance mutations</div>
+<div class="block-body" style="margin:.4rem 0">Fix adherence → continue same regimen<br><span style="font-size:12px;color:var(--color-text-secondary)">Adherence support + counselling is the intervention, not a regimen switch</span></div>
+</div>
+<div id="s7d" class="sub-panel">
+<div class="block-label"><span class="tag tag-if">IF</span> resistance present</div>
+<div class="block-body" style="margin:.4rem 0">Switch to high-barrier regimen:<br>
+<div class="pill-row"><span class="pill hi">Boosted darunavir (DRV/r or /c)</span><span class="pill">+ optimised NRTIs</span><span class="pill">± INSTI (if susceptible)</span></div>
+</div>
+<div class="card" style="margin-top:.5rem"><div class="card-label">Why PI?</div><div class="card-val">Boosted PI retains activity against many resistant viruses — extremely high resistance barrier</div></div>
+</div>
+<div id="s7e" class="sub-panel">
+<div class="block-label"><span class="tag tag-if">IF</span> INSTI resistance</div>
+<div class="block-body" style="margin:.4rem 0">PI-based regimen becomes the backbone — remove the failing INSTI<br><span style="font-size:12px;color:var(--color-text-secondary)">Consult HIV specialist for optimised backbone selection</span></div>
+</div>
+<div id="s7f" class="sub-panel">
+<div class="block-label"><span class="tag tag-if">IF</span> multi-drug resistance</div>
+<div class="block-body" style="margin:.4rem 0">Specialist advanced agents:<br>
+<div class="pill-row"><span class="pill hi2">Fostemsavir</span><span class="pill hi2">Ibalizumab</span><span class="pill hi2">Lenacapavir</span></div>
+<span style="font-size:12px;color:var(--color-text-secondary)">Multidisciplinary HIV specialist review required</span></div>
+</div>
+`},
+{id:'preg',navClass:'s-preg',badge:"Pregnancy",bclass:"b-pink",title:"Pregnancy pathway",sub:"ART selection, timing, and delivery considerations",content:`
+<div class="sub-tabs">
+<button class="sub-tab active" onclick="showSub(this,'preg-art')">ART selection</button>
+<button class="sub-tab" onclick="showSub(this,'preg-timing')">Timing & trimester</button>
+<button class="sub-tab" onclick="showSub(this,'preg-delivery')">Delivery & infant</button>
+</div>
+<div id="preg-art" class="sub-panel active">
+<div class="block-label">Preferred regimen in pregnancy</div>
+<div class="pill-row"><span class="pill pink">Dolutegravir + (TDF or TAF) + (FTC or 3TC)</span></div>
+<div class="card" style="margin:.5rem 0"><div class="card-label">DTG in pregnancy — current position</div><div class="card-val">Early 2018 Botswana signal of neural tube defects (NTDs) with periconceptional DTG has not been replicated in larger studies. WHO and most guidelines now recommend DTG throughout pregnancy including the first trimester. Counsel the patient; document the discussion.</div></div>
+<div class="block-label" style="margin-top:.75rem"><span class="pill avoid">Avoid in pregnancy</span></div>
+<div class="pill-row"><span class="pill avoid">Efavirenz (teratogenic in animal models, avoid in T1 if possible)</span><span class="pill avoid">Stavudine (d4T)</span><span class="pill avoid">Didanosine (ddI)</span></div>
+<div class="block" style="margin-top:.5rem"><div class="block-label">If HBV coinfection</div><div class="block-body" style="font-size:13px">Same rule as non-pregnant: include TDF/TAF + FTC or 3TC. Do not use DTG/3TC dual therapy.</div></div>
+</div>
+<div id="preg-timing" class="sub-panel">
+<div class="card-grid" style="grid-template-columns:1fr;gap:8px">
+<div class="card" style="border-left:3px solid #D4537E"><div class="card-label">ART-naive presenting in pregnancy</div><div class="card-val">Start ART immediately regardless of trimester or CD4 — do not wait for lab results if clinically urgent</div></div>
+<div class="card" style="border-left:3px solid #D4537E"><div class="card-label">Already on ART at conception</div><div class="card-val">Continue current suppressive regimen if safe in pregnancy. Switch only if regimen contains a contraindicated drug.</div></div>
+<div class="card" style="border-left:3px solid #EF9F27"><div class="card-label">Presenting late (&gt;28 weeks, not on ART)</div><div class="card-val">Start immediately. Consider IV zidovudine intrapartum if VL unknown or &gt;1000 copies/mL near delivery.</div></div>
+<div class="card" style="border-left:3px solid #888"><div class="card-label">VL monitoring in pregnancy</div><div class="card-val">Baseline → 4 weeks after start/change → monthly until undetectable → at 36 weeks to guide delivery mode</div></div>
+</div>
+</div>
+<div id="preg-delivery" class="sub-panel">
+<div class="card-grid" style="grid-template-columns:1fr;gap:8px">
+<div class="card" style="border-left:3px solid #1D9E75"><div class="card-label">VL &lt;50 at 36 weeks</div><div class="card-val">Vaginal delivery is safe. Elective caesarean not required for HIV alone.</div></div>
+<div class="card" style="border-left:3px solid #E24B4A"><div class="card-label">VL &gt;400 or unknown at delivery</div><div class="card-val">Elective caesarean section recommended. Add IV zidovudine intrapartum.</div></div>
+<div class="card" style="border-left:3px solid #3B8BD4"><div class="card-label">Infant prophylaxis</div><div class="card-val">Neonatal zidovudine ×4 weeks (low risk) or dual/triple therapy (high risk: VL &gt;1000 or no maternal ART). Start within 4–6 hours of birth.</div></div>
+<div class="card" style="border-left:3px solid #888"><div class="card-label">Breastfeeding</div><div class="card-val">Avoid if safe alternative feeding available. If breastfeeding (resource-limited settings), mother must remain on suppressive ART throughout.</div></div>
+</div>
+</div>
+`},
+{id:'iris',navClass:'s-iris',badge:"IRIS",bclass:"b-amber2",title:"IRIS — beyond CNS OIs",sub:"Immune reconstitution inflammatory syndrome at any site",content:`
+<div class="card" style="margin-bottom:.75rem;border-left:3px solid #EF9F27"><div class="card-label">Definition</div><div class="card-val">Paradoxical worsening or unmasking of an OI driven by recovering immune function after ART initiation — not treatment failure</div></div>
+<div class="block"><div class="block-label">Who is at highest risk?</div>
+<div class="pill-row"><span class="pill warn">CD4 &lt;100 at ART start</span><span class="pill warn">Active or subclinical OI present</span><span class="pill warn">Rapid VL drop in first weeks</span><span class="pill warn">ART started &lt;2 weeks into OI treatment</span></div>
+</div>
+<div class="block"><div class="block-label">Common IRIS presentations — not just CNS</div>
+<div class="iris-risk-row">
+<div class="card"><div class="card-label">TB-IRIS (most common)</div><div class="card-val" style="font-size:12px">Fever, lymphadenopathy, worsening infiltrates. Paradoxical or unmasking. Occurs 1–4 weeks after ART start.</div></div>
+<div class="card"><div class="card-label">Cryptococcal IRIS</div><div class="card-val" style="font-size:12px">Raised ICP, new meningism. Highest mortality — hence the 2–10 week delay rule for CM.</div></div>
+<div class="card"><div class="card-label">MAC-IRIS</div><div class="card-val" style="font-size:12px">Fever, lymphadenitis, hepatosplenomegaly 4–8 weeks post-ART. Often unmasking of subclinical MAC.</div></div>
+<div class="card"><div class="card-label">CMV-IRIS</div><div class="card-val" style="font-size:12px">Vitritis, uveitis flare after ART in treated CMV retinitis. Can cause vision loss.</div></div>
+<div class="card"><div class="card-label">PML-IRIS</div><div class="card-val" style="font-size:12px">JC virus encephalitis paradoxically worsens; may cause new CNS lesions despite ART benefit.</div></div>
+<div class="card"><div class="card-label">Herpes/VZV-IRIS</div><div class="card-val" style="font-size:12px">Cutaneous flares of HSV or zoster within weeks of ART start — more benign, but distressing.</div></div>
+</div>
+</div>
+<div class="block"><div class="block-label">Management principle</div>
+<div class="card-grid" style="grid-template-columns:1fr 1fr;gap:8px">
+<div class="card"><div class="card-label">Do NOT stop ART</div><div class="card-val" style="font-size:12px">Continuing ART is the rule — stopping worsens the underlying OI and long-term outcomes</div></div>
+<div class="card"><div class="card-label">Treat the OI</div><div class="card-val" style="font-size:12px">Ensure adequate treatment of the underlying infection is in place before declaring IRIS</div></div>
+<div class="card"><div class="card-label">Corticosteroids</div><div class="card-val" style="font-size:12px">Prednisolone for moderate–severe TB-IRIS (evidence-based). Use with caution in CM-IRIS and KS-IRIS.</div></div>
+<div class="card"><div class="card-label">Manage ICP (CM-IRIS)</div><div class="card-val" style="font-size:12px">Therapeutic LP remains key for raised ICP — do not rely on steroids alone for CM-IRIS</div></div>
+</div>
+</div>
+<div class="block"><div class="block-label"><span class="tag tag-note">Prevention rule</span></div>
+<div class="block-body" style="font-size:13px">For any active OI: treat the OI first, establish a response, then start ART. The optimal delay window varies by pathogen — CNS OIs carry the highest risk and longest delay. For non-CNS TB the standard is ART within 2–8 weeks of TB treatment start (CD4-dependent).</div>
+</div>
+`},
+{id:'mem',navClass:'s-mem',badge:"Memory",bclass:"b-purple",title:"Ultra-short version",sub:"Eight anchors — commit these to memory",content:`
+<div class="mem-box"><ol>
+<li><strong style="font-weight:500">Start INSTI-based ART immediately</strong></li>
+<li><strong style="font-weight:500">Check HBV</strong> → include tenofovir if positive</li>
+<li><strong style="font-weight:500">Adjust</strong> for TB/rifampin · renal impairment · HLA-B*5701</li>
+<li><strong style="font-weight:500">Pregnancy:</strong> DTG + TDF/TAF + FTC/3TC · start any trimester · VL at 36 weeks guides delivery</li>
+<li><strong style="font-weight:500">CD4 drives prophylaxis:</strong><br>&lt;200 → PCP &nbsp;|&nbsp; &lt;100 + IgG+ → Toxo &nbsp;|&nbsp; &lt;50 → MAC (only if ART delayed)</li>
+<li><strong style="font-weight:500">IRIS:</strong> treat OI first → delayed ART → do NOT stop ART if IRIS occurs → steroids for TB-IRIS</li>
+<li><strong style="font-weight:500">Monitor</strong> viral load at 4–8 weeks, then q3–6 months</li>
+<li><strong style="font-weight:500">Failure:</strong> adherence first → resistance test → PI-based escalation</li>
+</ol></div>
+`},
+];
+
+function buildNav(){
+const nav=document.getElementById('nav');
+steps.forEach((s,i)=>{
+const b=document.createElement('button');
+b.className=`step-btn ${s.navClass}${i===0?' active':''}`;
+b.textContent=s.badge;
+b.dataset.id=s.id;
+b.onclick=()=>activate(s.id,b);
+nav.appendChild(b);
+});
+}
+
+function buildPanels(){
+const c=document.getElementById('panels');
+steps.forEach((s,i)=>{
+const d=document.createElement('div');
+d.className=`panel${i===0?' active':''}`;
+d.id=`panel-${s.id}`;
+d.innerHTML=`<div class="panel-header"><span class="step-badge ${s.bclass}">${s.badge}</span><div><div class="panel-title">${s.title}</div><div class="panel-sub">${s.sub}</div></div></div>${s.content}`;
+c.appendChild(d);
+});
+}
+
+function activate(id,btn){
+document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+document.querySelectorAll('.step-btn').forEach(b=>b.classList.remove('active'));
+document.getElementById(`panel-${id}`).classList.add('active');
+btn.classList.add('active');
+}
+
+function showSub(btn,id){
+const parent=btn.closest('.panel');
+parent.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
+parent.querySelectorAll('.sub-panel').forEach(p=>p.classList.remove('active'));
+btn.classList.add('active');
+document.getElementById(id).classList.add('active');
+}
+
+buildNav();buildPanels();
+</script>
+</body>
+</html>
