@@ -118,6 +118,10 @@ background:var(--bg2);color:var(--t2);cursor:pointer;transition:all .12s;font-fa
 background:transparent;color:var(--t2);cursor:pointer;transition:all .12s;font-family:var(--f)}
 .stab.active{background:var(--bg2);color:var(--t1);border-color:var(--bd3)}
 .sp{display:none}.sp.active{display:block}
+.stab2{font-size:11px;padding:3px 9px;border:0.5px solid var(--bd2);border-radius:20px;
+background:transparent;color:var(--t2);cursor:pointer;transition:all .12s;font-family:var(--f)}
+.stab2.active{background:var(--bg2);color:var(--t1);border-color:var(--bd3)}
+.sp2{display:none}.sp2.active{display:block}
 
 /* WARN / INFO BOXES */
 .wb{border-radius:0 7px 7px 0;padding:.6rem .7rem;font-size:12px;line-height:1.5;margin:.4rem 0}
@@ -164,7 +168,7 @@ display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap
 <div class="nav-wrap" id="nav"></div>
 <div id="panels"></div>
 <div class="footer">
-<span>&#169; Developed by <strong>Saad Alharbi</strong> &amp; <strong>Meshail Alharbi</strong> &middot; <a href="mailto:Phalsalhi@gmail.com">Phalsalhi@gmail.com</a></span>
+<span>&#169; Developed by <strong>Saad Alharbi</strong> &amp; <strong>Meshail Alharbi</strong> &middot; Phalsalhi@gmail.com</span>
 <span>HIV Clinical Reference &middot; Based on HHS/NIH Guidelines</span>
 </div>
 </div>
@@ -1012,11 +1016,11 @@ Rash was not commonly reported in major TDF/FTC PrEP trials — if present, eval
 <!-- TAB 4: INJECTABLE PREP -->
 <div id="prep4" class="sp">
 <div class="stabs" style="margin-bottom:.7rem">
-<button class="stab active" onclick="showSub(this,'inj1')">CAB LA (q2 months)</button>
-<button class="stab" onclick="showSub(this,'inj2')">SC LEN (q6 months)</button>
+<button class="stab2 active" onclick="showSub2(this,'inj1')">CAB LA (q2 months)</button>
+<button class="stab2" onclick="showSub2(this,'inj2')">SC LEN (q6 months)</button>
 </div>
 
-<div id="inj1" class="sp active">
+<div id="inj1" class="sp2 active">
 <div class="wb teal"><strong>CAB LA (Apretude):</strong> Statistically superior to oral TDF/FTC — advantage is adherence, not intrinsic drug potency. Preferred for all adults/adolescents ≥35 kg open to injections.</div>
 <div class="cg" style="grid-template-columns:1fr 1fr">
 <div class="card acc-blue"><div class="cl">Initiation protocol</div><div class="cv">
@@ -1050,7 +1054,7 @@ Reassuring: no INSTI resistance mutations in HPTN 083 tail-phase infections
 <div class="wb amber"><strong>Drug interactions:</strong> Avoid with strong CYP inducers — carbamazepine, oxcarbazepine, phenobarbital, phenytoin, rifamycins significantly reduce CAB levels.</div>
 </div>
 
-<div id="inj2" class="sp">
+<div id="inj2" class="sp2">
 <div class="wb teal"><strong>SC LEN (Yeztugo):</strong> Capsid inhibitor — FDA approved June 2025. Statistically superior to both TDF/FTC AND TAF/FTC. Twice-yearly dosing is a major adherence advantage.</div>
 <div class="cg" style="grid-template-columns:1fr 1fr">
 <div class="card acc-blue"><div class="cl">Initiation protocol</div><div class="cv">
@@ -1273,6 +1277,14 @@ parent.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
 btn.classList.add('active');
 const parent2=parent;
 parent2.querySelectorAll('.sp').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+
+function showSub2(btn,id){
+const parent=btn.closest('.sp');
+parent.querySelectorAll('.stab2').forEach(t=>t.classList.remove('active'));
+btn.classList.add('active');
+parent.querySelectorAll('.sp2').forEach(p=>p.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
