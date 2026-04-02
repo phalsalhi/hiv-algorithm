@@ -41,6 +41,7 @@ background:var(--bg2);color:var(--t2);cursor:pointer;transition:all .12s;font-fa
 .nb.cat-adh{border-left:3px solid #888}
 .nb.cat-mem{border-left:3px solid #8B5CF6}
 .nb.cat-prep{border-left:3px solid #0891B2}
+.nb.cat-pep{border-left:3px solid #DC2626}
 
 /* PANEL */
 .panel{background:var(--bg1);border:0.5px solid var(--bd1);border-radius:12px;padding:1.1rem;display:none}
@@ -168,11 +169,11 @@ display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap
 <div class="nav-wrap" id="nav"></div>
 <div id="panels"></div>
 <div class="footer">
-<span>&#169; Developed by <strong>Saad Alharbi</strong> &amp; <strong>Meshail Alharbi</strong> &middot; Phalsalhi@gmail.com</span>
+<span>&#169; Developed by <strong>Saad Alharbi</strong> &amp; <strong>Meshail Alharbi</strong> &middot; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89d9e1e8e5fae8e5e1e0c9eee4e8e0e5a7eae6e4">[email&#160;protected]</a></span>
 <span>HIV Clinical Reference &middot; Based on HHS/NIH Guidelines</span>
 </div>
 </div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const steps=[
 {id:0,cat:'cat-dx',badge:'Baseline',bc:'b-gray',title:'Baseline evaluation & workup',sub:'Confirm diagnosis · Initial labs · Social & STI screening',content:`
 <div class="wb blue"><strong>What is HIV?</strong> Human Immunodeficiency Virus (HIV) is a retrovirus that infects and depletes CD4+ T-lymphocytes, progressively impairing cell-mediated immunity. Untreated, it leads to Acquired Immunodeficiency Syndrome (AIDS) — defined by CD4 &lt;200 cells/µL or an AIDS-defining illness. HIV is transmitted via sexual contact, blood exposure, and vertical (mother-to-child) transmission. HIV-1 is the predominant global strain; HIV-2 is less pathogenic and intrinsically NNRTI-resistant. With early and consistent ART, people living with HIV can achieve a near-normal life expectancy and carry effectively zero risk of sexual transmission when maintaining a suppressed viral load—defined as fewer than 50 copies per milliliter (U=U: Undetectable = Untransmittable).</div>
@@ -1238,6 +1239,364 @@ HBV+ patients on TDF/FTC or TAF/FTC: monitor closely for hepatic flare — devel
 </div></div>
 </div></div>
 </div>
+`},
+
+{id:'pep',cat:'cat-pep',badge:'PEP',bc:'b-red',title:'Post-Exposure Prophylaxis (PEP)',sub:'Occupational · Non-occupational · Sexual assault · 28-day regimens · HBV/HCV management',content:`
+<div class="wb red"><strong>HIV exposure is a medical emergency.</strong> Administer the first PEP dose ideally within 2 hours — never later than 72 hours after exposure. Effectiveness decreases rapidly after 2 hours. Assessment, baseline testing, and source evaluation occur <em>after</em> the first dose is given.</div>
+
+<div class="stabs">
+<button class="stab active" onclick="showSub(this,'pep1')">Exposure & Risk</button>
+<button class="stab" onclick="showSub(this,'pep2')">Regimens</button>
+<button class="stab" onclick="showSub(this,'pep3')">Baseline Testing</button>
+<button class="stab" onclick="showSub(this,'pep4')">Source & Follow-up</button>
+<button class="stab" onclick="showSub(this,'pep5')">HBV / HCV</button>
+</div>
+
+<!-- TAB 1: EXPOSURE & RISK -->
+<div id="pep1" class="sp active">
+<div class="bl"><div class="blab">Exposure types that warrant PEP</div>
+<div class="cg" style="grid-template-columns:1fr 1fr">
+<div class="card acc-red"><div class="cl">Occupational — PEP always indicated</div><div class="cv">
+• Percutaneous break via sharp contaminated with blood, visibly bloody fluid, or other infectious material<br>
+• Mucocutaneous splash (eye, nose, mouth) with blood or infectious material<br>
+• Non-intact skin (dermatitis, abrasion, wound) exposure to blood<br>
+• Bite from patient with visible oral bleeding causing bleeding in exposed worker<br>
+<br>
+<span class="tag tw">PEP NOT indicated:</span> Saliva without visible blood (including being spat on)
+</div></div>
+<div class="card acc-red"><div class="cl">Non-occupational / Sexual assault — PEP indicated</div><div class="cv">
+• Receptive or insertive vaginal or anal intercourse<br>
+• Needle sharing (drug use)<br>
+• Penetrating needlestick with hollow-bore needle + blood exposure<br>
+• Human bite with visible blood exchange (both parties)<br>
+• Sexual assault: direct mucosal contact with semen, vaginal fluids, or blood of assailant — with or without visible injury<br>
+• Broken skin/mucous membranes in contact with assailant's blood, semen, or vaginal fluids
+</div></div>
+<div class="card acc-gray"><div class="cl">Lower risk — assess case-by-case</div><div class="cv">
+Oral sex (receptive or insertive) with or without ejaculation — consider if risk-enhancing factors present:<br>
+• Source has high viral load<br>
+• Non-intact oral mucosa (lesions, gingivitis)<br>
+• Frank blood exposure<br>
+• STI present in source or exposed individual
+</div></div>
+<div class="card acc-teal"><div class="cl">PEP NOT indicated (negligible risk)</div><div class="cv">
+• Kissing, spitting, throwing body fluids<br>
+• Oral-to-oral resuscitation without mucosal damage<br>
+• Human bites without blood exchange<br>
+• Solid-bore needle exposure (tattoo needles, lancets) not in recent contact with blood<br>
+• Mutual masturbation without skin breakdown or blood exposure<br>
+• Saliva/sweat/tears/non-bloody urine or feces
+</div></div>
+</div></div>
+
+<hr class="div">
+<div class="bl"><div class="blab">Risk per 10,000 exposures from HIV+ source (CDC data)</div>
+<table class="ct">
+<tr><th>Exposure type</th><th>Risk / 10,000</th></tr>
+<tr><td class="reg">Receptive anal intercourse</td><td>138</td></tr>
+<tr><td class="reg">Needle sharing (injection drug use)</td><td>63</td></tr>
+<tr><td class="reg">Percutaneous needlestick (occupational)</td><td>23</td></tr>
+<tr><td class="reg">Insertive anal intercourse</td><td>11</td></tr>
+<tr><td class="reg">Receptive penile-vaginal intercourse</td><td>8</td></tr>
+<tr><td class="reg">Insertive penile-vaginal intercourse</td><td>4</td></tr>
+<tr><td class="reg">Oral sex</td><td>Low — rarely documented</td></tr>
+<tr><td class="reg">Biting / spitting / sharing sex toys</td><td>Negligible</td></tr>
+</table>
+</div>
+
+<hr class="div">
+<div class="bl"><div class="blab">Factors that increase transmission risk</div>
+<div class="cg" style="grid-template-columns:1fr 1fr">
+<div class="card acc-amber"><div class="cl">Source-related</div><div class="cv">
+• High viral load (especially acute/early HIV — 8–12× higher risk)<br>
+• Not on ART or incomplete viral suppression<br>
+• Presence of STIs, genital/anorectal ulcers<br>
+• Lack of male circumcision (for insertive exposure)
+</div></div>
+<div class="card acc-amber"><div class="cl">Exposure-related</div><div class="cv">
+• Deep penetrating wound, hollow-bore needle, needle from artery/vein<br>
+• Presence of blood on device<br>
+• Genitorectal or anogenital trauma (especially in sexual assault)<br>
+• Non-intact oral mucosa during oral sexual exposure
+</div></div>
+</div>
+<div class="wb teal"><strong>U=U applies:</strong> If source is confirmed on ART with undetectable viral load (HIV RNA &lt;200 copies/mL) at time of consensual sexual exposure — transmission risk is effectively zero. PEP may be discontinued in this scenario; if requested by the exposed person, it should not be denied.</div>
+</div>
+
+<hr class="div">
+<div class="bl"><div class="blab">Timing — the 72-hour rule</div>
+<div class="cg" style="grid-template-columns:1fr 1fr 1fr">
+<div class="card acc-teal"><div class="cl">Ideal: within 2 hours</div><div class="cv">Highest efficacy — start immediately without waiting for labs, source status, or full evaluation</div></div>
+<div class="card acc-amber"><div class="cl">Acceptable: up to 72 hours</div><div class="cv">Efficacy decreases over time. Administer first dose; evaluate exposure and source in parallel.</div></div>
+<div class="card acc-red"><div class="cl">After 72 hours — do NOT start PEP</div><div class="cv">HIV infection may already be established. Starting PEP then stopping at 28 days risks viral rebound and ART resistance. Offer HIV testing and serial follow-up instead.</div></div>
+</div></div>
+</div>
+
+<!-- TAB 2: REGIMENS -->
+<div id="pep2" class="sp">
+<div class="bl"><div class="blab">Preferred PEP Regimens (weight ≥40 kg) — 28 days</div>
+<table class="ct">
+<tr><th>Regimen</th><th>Dosing</th><th>Notes</th></tr>
+<tr><td class="reg">BIC/TAF/FTC (Biktarvy) ⭐ Preferred single tablet</td><td>1 tablet once daily</td><td>Lowest discontinuation rates; minimal adverse effects; active against HIV-2; preferred for most</td></tr>
+<tr><td class="reg">TDF/FTC (Truvada) + DTG (Tivicay)</td><td>TDF/FTC 1 tablet daily + DTG 50 mg daily</td><td>High completion rates; DTG safe throughout pregnancy (teratogenicity concern removed); limit metformin to 1 g/day with DTG</td></tr>
+<tr><td class="reg">TDF/FTC (Truvada) + RAL (Isentress)</td><td>TDF/FTC 1 tablet daily + RAL 400 mg BID <em>or</em> RAL HD 1200 mg daily</td><td>Good tolerability; avoid Mg/Al antacids with RAL; RAL HD not for pregnant patients; twice-daily dosing affects adherence</td></tr>
+<tr><td class="reg">3TC may substitute FTC in either multi-tablet regimen above</td><td>3TC 300 mg daily</td><td>Equivalent efficacy; available as TDF/3TC (Cimduo)</td></tr>
+</table>
+<div class="wb amber"><strong>Drug-drug interactions:</strong> Avoid divalent cations (Ca, Mg, Al, Fe) concurrently with DTG or RAL. GI side effects are common with TDF/FTC (nausea, bloating) — counsel patients; a "double-up" missed dose is not needed — take as soon as remembered within 24 hrs.</div>
+</div>
+
+<hr class="div">
+<div class="bl"><div class="blab">Alternative PEP Regimens (weight ≥40 kg)</div>
+<table class="ct">
+<tr><th>Regimen</th><th>Notes / Caveats</th></tr>
+<tr><td class="reg">EVG/COBI/FTC/TDF (Stribild)</td><td>Contraindicated if CrCl &lt;70 mL/min; avoid in pregnancy (COBI contraindicated); high P450 DDI potential</td></tr>
+<tr><td class="reg">TDF/FTC + DRV/r (Prezista/Norvir) 800/100 mg daily</td><td>DRV/r + 2 NRTIs — acceptable if preferred regimens unavailable; PI-based; dose-adjust DRV in pregnancy (600 mg BID)</td></tr>
+</table>
+</div>
+
+<hr class="div">
+<div class="bl"><div class="blab">Special populations</div>
+<div class="cg" style="grid-template-columns:1fr 1fr">
+<div class="card acc-pink"><div class="cl">Pregnancy / trying to conceive</div><div class="cv">
+<span class="tag tt">Preferred:</span> TDF/FTC + DTG <em>or</em> TDF/FTC + RAL (A2)<br>
+<span class="tag tn">Alternative:</span> BIC/TAF/FTC (A3)<br>
+DTG is safe throughout pregnancy — prior teratogenicity concern removed (Zash 2022)<br>
+RAL HD should NOT be used in pregnancy<br>
+Avoid COBI-containing regimens<br>
+Advise avoiding breast/chestfeeding for 3 months after exposure
+</div></div>
+<div class="card acc-amber"><div class="cl">Impaired renal function</div><div class="cv">
+Do NOT start TDF/FTC if confirmed CrCl &lt;60 mL/min<br>
+Discontinue TDF/FTC if CrCl &lt;50 mL/min<br>
+Switch to a TAF-containing regimen (BIC/TAF/FTC) in these cases
+</div></div>
+<div class="card acc-blue"><div class="cl">Pediatric (weight &lt;40 kg)</div><div class="cv">
+<strong>Preferred (≥14 kg):</strong> BIC/TAF/FTC (lower strength tablet 30/15/120 mg for 14–&lt;25 kg)<br>
+<strong>Preferred (≥2 yr, cannot swallow):</strong> TDF + FTC + RAL (weight-based dosing)<br>
+<strong>Infants 4 wk–&lt;2 yr:</strong> ZDV oral solution + 3TC oral solution + RAL or LPV/r<br>
+Include antiemetics in starter packs for children
+</div></div>
+<div class="card acc-red"><div class="cl">ARV medications to AVOID for PEP</div><div class="cv">
+<span class="tag tw">Avoid:</span> ABC (hypersensitivity — HLA-B*5701 needed), EFV (neuropsychiatric), NVP (hepatotoxicity/SJS), IDV, NFV (poorly tolerated), MVC (R5-tropic only), ZDV (in adults — mitochondrial toxicity; still used in pediatric PEP)<br>
+Note: ZDV still recommended for perinatal transmission prevention
+</div></div>
+</div></div>
+
+<hr class="div">
+<div class="bl"><div class="blab">PEP-in-Pocket (PIP) and starter packs</div>
+<div class="cg" style="grid-template-columns:1fr 1fr 1fr">
+<div class="card acc-gray"><div class="cl">PEP-in-Pocket</div><div class="cv">Pre-prescribed PEP for individuals with anticipated low-frequency, high-risk exposures. Studies show participants initiate PEP significantly sooner than those without a prescription. Store medication clean and dry.</div></div>
+<div class="card acc-gray"><div class="cl">Starter pack (non-occupational)</div><div class="cv">Provide 7-day supply if full 28-day course cannot be given. Instruct on plan to obtain remainder before day 7. Counsel that starter pack ≠ full course — follow-up required.</div></div>
+<div class="card acc-teal"><div class="cl">Sexual assault (NY State law)</div><div class="cv">Hospital clinicians are required by law to provide a FULL 28-day PEP regimen to all sexual assault patients regardless of age (effective February 3, 2026). Do not provide only a 7-day starter pack for sexual assault.</div></div>
+</div></div>
+
+<hr class="div">
+<div class="bl"><div class="blab">Extending PEP beyond 28 days — rare circumstances only</div>
+<div class="cg" style="grid-template-columns:1fr">
+<div class="card acc-amber"><div class="cl">Only extend if:</div><div class="cv">
+• Exposed individual has indeterminate HIV result or signs/symptoms of acute retroviral syndrome at week 4<br>
+• Exposed individual is pregnant with high probability of HIV exposure (viral rebound risk)<br>
+Consult experienced HIV provider in both cases. No data support routine extension.
+</div></div>
+</div></div>
+</div>
+
+<!-- TAB 3: BASELINE TESTING -->
+<div id="pep3" class="sp">
+<div class="wb blue">Baseline testing should be performed at time of PEP initiation (no later than 72 hours after exposure). Administer first PEP dose before or simultaneously — do not delay treatment to await results.</div>
+
+<div class="bl"><div class="blab">Required baseline tests — all exposure types</div>
+<table class="ct">
+<tr><th>Test</th><th>Indication</th></tr>
+<tr><td class="reg">HIV-1/2 Ag/Ab combination immunoassay</td><td>All exposures — establishes HIV status at time of exposure. Rapid oral tests NOT recommended (insufficient sensitivity for acute infection)</td></tr>
+<tr><td class="reg">Serum liver enzymes (ALT/AST), BUN, creatinine</td><td>All exposures</td></tr>
+<tr><td class="reg">CBC</td><td>All exposures (required if ZDV is part of regimen)</td></tr>
+<tr><td class="reg">Pregnancy test</td><td>All individuals of childbearing capacity</td></tr>
+<tr><td class="reg">Hepatitis B serology (HBsAg + anti-HBs)</td><td>All exposures — guides HBV PEP decisions</td></tr>
+<tr><td class="reg">HCV antibody (± HCV RNA)</td><td>All exposures — see HBV/HCV tab for details</td></tr>
+<tr><td class="reg">Rapid plasma reagin (RPR) for syphilis</td><td>Sexual exposures</td></tr>
+<tr><td class="reg">Gonorrhea/Chlamydia NAAT (site-specific)</td><td>Sexual exposures (not recommended in sexual assault adults — see below)</td></tr>
+<tr><td class="reg">Trichomoniasis NAAT</td><td>Sexual exposures</td></tr>
+</table>
+<div class="wb amber"><strong>Sexual assault — STI testing caveat:</strong> In adults, do NOT perform routine baseline GC/CT/trich/syphilis testing — results reflect pre-assault status and may be used to bias a jury. Provide empiric treatment for gonorrhea, chlamydia, and trichomoniasis. In children aged 2–12 years, DO perform baseline STI testing (repetitive abuse possible).</div>
+</div>
+
+<hr class="div">
+<div class="bl"><div class="blab">If baseline HIV test is reactive</div>
+<div class="cg" style="grid-template-columns:1fr">
+<div class="card acc-red"><div class="cl">Do not stop PEP — continue while confirming</div><div class="cv">
+Continue PEP regimen until HIV-1/HIV-2 Ab differentiation immunoassay or HIV-1 RNA confirms or rules out HIV infection.<br>
+If confirmed positive → PEP regimen becomes ART → refer immediately to experienced HIV care provider for rapid ART initiation.<br>
+If reactive Ag/Ab but negative differentiation + negative RNA → likely false positive; discontinue PEP.
+</div></div>
+</div></div>
+
+<hr class="div">
+<div class="bl"><div class="blab">Sequential HIV testing schedule</div>
+<table class="ct">
+<tr><th>Timepoint</th><th>Test</th><th>Notes</th></tr>
+<tr><td class="reg">Baseline (at PEP start)</td><td>HIV Ag/Ab combination immunoassay</td><td>Not to document seroconversion — to document prior HIV status</td></tr>
+<tr><td class="reg">Week 4</td><td>HIV Ag/Ab combination immunoassay + routine labs</td><td>Preferred in-person visit. Continue PEP to full 28 days.</td></tr>
+<tr><td class="reg">Week 12</td><td>HIV Ag/Ab combination immunoassay</td><td>Final recommended test. Seroconversion rarely occurs after 12 weeks.</td></tr>
+<tr><td class="reg">Week 6 (if HCV concern)</td><td>HCV RNA</td><td>Can detect acute HCV before antibody seroconverts — see HBV/HCV tab</td></tr>
+</table>
+<div class="wb teal">Serial HIV testing at 4 and 12 weeks is recommended even if PEP was declined. HIV testing at 6 months is no longer routinely recommended — modern Ag/Ab assays are sufficiently sensitive.</div>
+</div>
+
+<hr class="div">
+<div class="bl"><div class="blab">Patient education checklist — address all before discharge</div>
+<div class="cg" style="grid-template-columns:1fr 1fr">
+<div class="card acc-blue"><div class="cl">Medication counseling</div><div class="cv">
+• Why first dose is given immediately<br>
+• How and when to take PEP (timing, food requirements)<br>
+• Importance of completing full 28 days — incompletion risks seroconversion<br>
+• If dose missed: do NOT double up — take as soon as remembered within 24 hrs<br>
+• Possible adverse effects and what to do<br>
+• How to access remaining medication supply
+</div></div>
+<div class="card acc-blue"><div class="cl">Clinical counseling</div><div class="cv">
+• Symptoms of acute HIV infection (flu/mono-like illness, fever, rash, lymphadenopathy, arthralgias)<br>
+• Seek care immediately if acute HIV symptoms develop<br>
+• Serial HIV testing schedule and purpose<br>
+• "Window period" — negative baseline does not rule out pre-existing infection<br>
+• Transition to PrEP if ongoing risk — candidates can start immediately after completing PEP
+</div></div>
+</div></div>
+</div>
+
+<!-- TAB 4: SOURCE & FOLLOW-UP -->
+<div id="pep4" class="sp">
+<div class="wb blue">The HIV status of the source should NOT be the primary focus during initial PEP administration. Start PEP first. Source evaluation guides whether to continue PEP for the full 28 days.</div>
+
+<div class="bl"><div class="blab">Source HIV testing — when available</div>
+<table class="ct">
+<tr><th>Source status</th><th>Action</th></tr>
+<tr><td class="reg">Source available + unknown HIV status</td><td>Obtain consent; test with HIV Ag/Ab combination immunoassay (NOT rapid oral test). If reactive: confirm with differentiation immunoassay. If possible HIV exposure in past 4 weeks: also test HIV-1 RNA (window period risk).</td></tr>
+<tr><td class="reg">Source confirms HIV negative (no recent exposure)</td><td>Discontinue PEP once confirmed</td></tr>
+<tr><td class="reg">Source negative Ag/Ab but reports HIV exposure in past 4 weeks</td><td>Continue PEP; add HIV-1 RNA to source testing. If RNA negative → stop PEP. If RNA positive → complete 28-day course.</td></tr>
+<tr><td class="reg">Source HIV positive (confirmed or suspected)</td><td>Obtain viral load, ART history, and resistance profile if available. Consult experienced HIV provider to optimize PEP regimen. Do NOT delay first PEP dose while gathering this information.</td></tr>
+<tr><td class="reg">Source positive + undetectable VL + on ART (consensual sex)</td><td>U=U applies — may discontinue PEP. However, if exposed person requests PEP, do not deny.</td></tr>
+<tr><td class="reg">Source unavailable / unknown</td><td>Assume source has HIV until proven otherwise. Recommend exposed individual complete full 28-day course.</td></tr>
+</table>
+<div class="wb amber"><strong>Rapid oral HIV tests should NOT be used for source testing</strong> — insufficient sensitivity for recent infection. Use laboratory-based or POC Ag/Ab combination immunoassay only.</div>
+</div>
+
+<hr class="div">
+<div class="bl"><div class="blab">Follow-up schedule</div>
+<table class="ct">
+<tr><th>Timepoint</th><th>Contact type</th><th>Actions</th></tr>
+<tr><td class="reg">48 hours after PEP start</td><td>Telephone or in-person</td><td>Assess medication tolerance; confirm medication access; assess adverse effects; reinforce adherence</td></tr>
+<tr><td class="reg">Week 2</td><td>Telephone or in-person</td><td>Adverse effect check; confirm completion plan; STI testing at week 2 for sexual exposures</td></tr>
+<tr><td class="reg">Week 4</td><td>In-person preferred</td><td>HIV Ag/Ab test; routine labs (LFTs, creatinine, CBC if indicated); HCV RNA if source had HCV; pregnancy test if applicable</td></tr>
+<tr><td class="reg">Week 12</td><td>In-person</td><td>Final HIV Ag/Ab test; HCV antibody if source had HCV; transition to PrEP discussion if ongoing risk</td></tr>
+</table>
+</div>
+
+<hr class="div">
+<div class="bl"><div class="blab">If PEP is declined by exposed person — still do:</div>
+<div class="cg" style="grid-template-columns:1fr">
+<div class="card acc-gray"><div class="cl">Document and arrange follow-up</div><div class="cv">
+• Explain 72-hour window and give instructions to access PEP if they change mind<br>
+• Describe symptoms of acute retroviral syndrome<br>
+• Provide contact information for medical care<br>
+• Arrange serial HIV testing at weeks 4 and 12<br>
+• Document refusal in medical record<br>
+• Provide referral for counseling / trauma care if sexual assault
+</div></div>
+</div></div>
+
+<hr class="div">
+<div class="bl"><div class="blab">Transition to PrEP after PEP completion</div>
+<div class="cg" style="grid-template-columns:1fr">
+<div class="card acc-teal"><div class="cl">Candidates for immediate PrEP after PEP</div><div class="cv">
+Individuals who report ongoing high-risk exposures should be offered PrEP:<br>
+• Start immediately if PEP not indicated for current exposure and HIV negative<br>
+• Start at PEP completion once HIV negative status confirmed at week 4 test<br>
+Repeated PEP requests are a strong signal that the person needs PrEP — do not dismiss. Refer if PrEP not available on-site.
+</div></div>
+</div></div>
+
+<hr class="div">
+<div class="bl"><div class="blab">PEP on PrEP — special scenario</div>
+<div class="cg" style="grid-template-columns:1fr">
+<div class="card acc-amber"><div class="cl">Person on PrEP with daily adherence requests PEP after sexual exposure</div><div class="cv">
+Additional ARVs for PEP are NOT warranted in most situations for daily PrEP users (consistent adherence = 99% effective).<br>
+<strong>Consider PEP if:</strong> Recently started PrEP, inconsistent adherence, on-demand dosing, source has known resistance to PrEP components, or source viral load unsuppressed (&gt;200 copies/mL).<br>
+A request for PEP from a consistently adherent daily PrEP user after a low- or zero-risk exposure should not be accommodated.
+</div></div>
+</div></div>
+</div>
+
+<!-- TAB 5: HBV / HCV -->
+<div id="pep5" class="sp">
+<div class="bl"><div class="blab">HBV — baseline testing</div>
+<div class="cg" style="grid-template-columns:1fr">
+<div class="card acc-amber"><div class="cl">Triple panel for exposed individual (within 48 hrs)</div><div class="cv">
+HBsAg · anti-HBc (total) · anti-HBs<br>
+<strong>If anti-HBs ≥10 mIU/mL or chronic HBV infection known:</strong> No further HBV intervention needed<br>
+Also test source for HBsAg, anti-HBc, and anti-HBs when possible
+</div></div>
+</div></div>
+
+<hr class="div">
+<div class="bl"><div class="blab">HBV PEP — what to do based on vaccination status</div>
+<table class="ct">
+<tr><th>Exposed individual's HBV status</th><th>Source HBsAg</th><th>HBIG</th><th>Vaccination</th></tr>
+<tr><td class="reg">Documented response to complete vaccine series</td><td>Any</td><td>None needed</td><td>None needed</td></tr>
+<tr><td class="reg">Documented non-response after 2 vaccine series</td><td>Positive or unknown</td><td>2 doses HBIG 0.06 mL/kg IM × 1 month apart</td><td>Revaccinate with CpG-adjuvanted vaccine</td></tr>
+<tr><td class="reg">Response unknown after complete series</td><td>Positive or unknown</td><td>1 dose HBIG 0.06 mL/kg if anti-HBs &lt;10 mIU/mL</td><td>Revaccinate; check anti-HBs 1–2 months post-completion</td></tr>
+<tr><td class="reg">Not vaccinated / incomplete series / unknown status</td><td>Positive or unknown</td><td>1 dose HBIG 0.06 mL/kg IM</td><td>Complete vaccine series; check anti-HBs post-completion</td></tr>
+<tr><td class="reg">Not vaccinated / incomplete series</td><td>Negative</td><td>None</td><td>Complete vaccination series</td></tr>
+</table>
+<div class="wb blue">
+<strong>HBV vaccine:</strong> First dose within 24 hours of exposure — do not delay for triple panel results.<br>
+<strong>Standard 3-dose vaccine</strong> (Recombivax-HB, Engerix-B): 0, 1–2, 6 months<br>
+<strong>2-dose CpG-adjuvanted vaccine</strong> (Heplisav-B): 0 and 1 month — preferred for non-responders<br>
+<strong>HBIG:</strong> Administer within 7 days (ideally) and no later than 14 days post-exposure; at a different injection site from vaccine<br>
+HBV vaccination efficacy: 70–90% when initiated within 12–24 hours
+</div></div>
+
+<hr class="div">
+<div class="bl"><div class="blab">HBV transmission risk context</div>
+<div class="cg" style="grid-template-columns:1fr 1fr">
+<div class="card acc-red"><div class="cl">HBV vs HIV needlestick risk</div><div class="cv">
+HBV needlestick risk: <strong>1%–31%</strong> depending on HBeAg status<br>
+• HBeAg positive: 22%–31%<br>
+• HBeAg negative: 1%–6%<br>
+HIV needlestick risk: 0.3%<br>
+HBV is substantially more infectious per needlestick than HIV
+</div></div>
+<div class="card acc-amber"><div class="cl">Fluids with meaningful HBV risk</div><div class="cv">
+Blood · Semen · Vaginal secretions · Amniotic fluid<br>
+Cerebrospinal, synovial, pleural, peritoneal, pericardial fluids<br>
+Human milk<br>
+<span class="tag tw">No meaningful risk:</span> Non-bloody saliva, sweat, tears, non-bloody urine/feces
+</div></div>
+</div></div>
+
+<hr class="div">
+<div class="bl"><div class="blab">HCV — key principles</div>
+<div class="cg" style="grid-template-columns:1fr">
+<div class="card acc-gray"><div class="cl">No effective PEP for HCV</div><div class="cv">
+<span class="tag tw">Do NOT administer immunoglobulin or antivirals prophylactically</span> — no benefit established.<br>
+HCV occupational needlestick risk: <strong>1.8%</strong> (vs 0.3% for HIV)<br>
+Highest risk: anal receptive intercourse and blood-to-blood contact<br>
+HCV is NOT transmitted via breast/chestfeeding, shared eating utensils, hugging, kissing, or coughing/sneezing
+</div></div>
+</div></div>
+
+<hr class="div">
+<div class="bl"><div class="blab">HCV — follow-up testing after exposure</div>
+<table class="ct">
+<tr><th>Timepoint</th><th>Test</th><th>Notes</th></tr>
+<tr><td class="reg">Baseline</td><td>HCV antibody (with reflex to HCV RNA if positive); LFTs</td><td>Source should be tested with HCV RNA (preferred) or HCV Ab</td></tr>
+<tr><td class="reg">3–6 weeks after exposure</td><td>HCV RNA</td><td>Detects acute HCV within 2 weeks of infection — before antibody seroconverts. Perform only if source has known HCV viremia or unknown status.</td></tr>
+<tr><td class="reg">4–6 months after exposure (weeks 24)</td><td>HCV antibody (reflex to HCV RNA if positive)</td><td>Final test. Coincides with HIV and HBV post-exposure testing if applicable. For immunocompromised: add HCV RNA at this visit.</td></tr>
+</table>
+<div class="wb teal">
+If HCV infection is identified at any point → refer promptly to HCV specialist. Direct-acting antivirals are highly effective for acute HCV, though optimal timing and duration remain under study. Observation for spontaneous resolution (8–12 weeks) is reasonable in select cases.
+</div></div>
+</div>
 `}
 
 ];
@@ -1282,14 +1641,4 @@ document.getElementById(id).classList.add('active');
 
 function showSub2(btn,id){
 const parent=btn.closest('.sp');
-parent.querySelectorAll('.stab2').forEach(t=>t.classList.remove('active'));
-btn.classList.add('active');
-parent.querySelectorAll('.sp2').forEach(p=>p.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-}
-
-buildNav();
-buildPanels();
-</script>
-</body>
-</html>
+parent.querySelectorAll('.stab2').forEach(t=>t.classList.r
