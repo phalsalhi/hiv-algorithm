@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HIV Management — Complete Clinical Reference</title>
+<title>HIV Management — Concise Clinical Reference</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -155,21 +155,21 @@ display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap
 </head>
 <body>
 <div class="page">
-<h1>HIV Management — Complete Clinical Reference</h1>
+<h1>HIV Management — Concise Clinical Reference</h1>
 <p class="tagline">Based on HHS/NIH Guidelines · Adults & Adolescents ARV · OI · Perinatal · Pediatric · Updated 2024–2026</p>
 <p class="source-note">Sources: HHS Panel on ARV Guidelines for Adults and Adolescents (Sep 2025); Guidelines for Prevention and Treatment of OIs (Mar 2026); Perinatal Guidelines (Jun 2025); Pediatric ARV Guidelines (Nov 2025)</p>
 <hr class="div">
 <div class="nav-wrap" id="nav"></div>
 <div id="panels"></div>
 <div class="footer">
-<span>&#169; Developed by <strong>Saad Alharbi-Meshail Alharbi</strong> &middot; <a href="mailto:Phalsalhi@gmail.com" style="color:inherit;text-decoration:none">Phalsalhi@gmail.com</a></span>
+<span>&#169; Developed by <strong>Saad Alharbi-Meshail Alharbi</strong> &middot; Phalsalhi@gmail.com</span>
 <span>HIV Clinical Reference &middot; Based on HHS/NIH Guidelines</span>
 </div>
 </div>
 <script>
 const steps=[
 {id:0,cat:'cat-dx',badge:'Baseline',bc:'b-gray',title:'Baseline evaluation & workup',sub:'Confirm diagnosis · Initial labs · Social & STI screening',content:`
-<div class="wb blue"><strong>What is HIV?</strong> Human Immunodeficiency Virus (HIV) is a retrovirus that infects and depletes CD4+ T-lymphocytes, progressively impairing cell-mediated immunity. Untreated, it leads to Acquired Immunodeficiency Syndrome (AIDS) — defined by CD4 &lt;200 cells/µL or an AIDS-defining illness. HIV is transmitted via sexual contact, blood exposure, and vertical (mother-to-child) transmission. HIV-1 is the predominant global strain; HIV-2 is less pathogenic and intrinsically NNRTI-resistant. With effective ART, people with HIV can achieve normal life expectancy and cannot sexually transmit the virus (U=U: Undetectable = Untransmittable).</div>
+<div class="wb blue"><strong>What is HIV?</strong> Human Immunodeficiency Virus (HIV) is a retrovirus that infects and depletes CD4+ T-lymphocytes, progressively impairing cell-mediated immunity. Untreated, it leads to Acquired Immunodeficiency Syndrome (AIDS) — defined by CD4 &lt;200 cells/µL or an AIDS-defining illness. HIV is transmitted via sexual contact, blood exposure, and vertical (mother-to-child) transmission. HIV-1 is the predominant global strain; HIV-2 is less pathogenic and intrinsically NNRTI-resistant. With early and consistent ART, people living with HIV can achieve a near-normal life expectancy and carry effectively zero risk of sexual transmission when maintaining a suppressed viral load—defined as fewer than 50 copies per milliliter (U=U: Undetectable = Untransmittable).</div>
 <div class="bl"><div class="blab">Confirm HIV</div>
 <div class="pr"><span class="pill hi">HIV Ag/Ab (4th gen) + differentiation assay</span><span class="pill">If RNA &lt;LLoD: repeat Ag/Ab</span></div>
 </div>
@@ -226,8 +226,8 @@ const steps=[
 
 {id:2,cat:'cat-art',badge:'What to Start',bc:'b-blue',title:'ART regimen selection',sub:'Recommended · Alternative · Scenario-specific',content:`
 <div class="stabs">
-<button class="stab active" onclick="showSub(this,'ws1')">Recommended options</button>
-<button class="stab" onclick="showSub(this,'ws2')">Alternative options</button>
+<button class="stab active" onclick="showSub(this,'ws1')">Recommended (Table 6a)</button>
+<button class="stab" onclick="showSub(this,'ws2')">Alternative (Table 6b)</button>
 <button class="stab" onclick="showSub(this,'ws3')">Scenario modifiers</button>
 <button class="stab" onclick="showSub(this,'ws4')">ARV classes overview</button>
 </div>
@@ -586,7 +586,7 @@ DOT (directly observed therapy) recommended for all HIV/TB (AII)</div>
 </div>
 <table class="ct">
 <tr><th>Switch scenario</th><th>Option</th><th>Key requirements</th></tr>
-<tr><td class="reg">No prior resistance, suppressed</td><td>Any Table 6a or 6b regimen; or NRTI-sparing: DTG/RPV (AI) or LA CAB/RPV (AI)</td><td>No prior INSTI or RPV resistance; no HBV</td></tr>
+<tr><td class="reg">No prior resistance, suppressed</td><td>Restart previously prescribed HIV medications; or NRTI-sparing: DTG/RPV (AI) or LA CAB/RPV (AI)</td><td>No prior INSTI or RPV resistance; no HBV</td></tr>
 <tr><td class="reg">Existing NRTI resistance</td><td>Include TAF/TDF + FTC/3TC + high-barrier drug (DTG/BIC/DRV)</td><td>Avoid switching if uncertain about resistance</td></tr>
 <tr><td class="reg">HBV/HIV coinfection switching</td><td>Maintain TDF or TAF; or add entecavir to new regimen (AII)</td><td>Never stop HBV-active agents without HBV plan</td></tr>
 <tr><td class="reg">Toxicity-driven switch</td><td>Remove offending drug; substitute with equivalent (or different class if needed)</td><td>Monitor VL 4–8 weeks after switch (AIII)</td></tr>
@@ -606,8 +606,8 @@ DOT (directly observed therapy) recommended for all HIV/TB (AII)</div>
 <div class="wb teal"><strong>Core principle:</strong> ART should be initiated immediately in all pregnant people with HIV, regardless of trimester or CD4 count, to protect maternal health and prevent perinatal transmission.</div>
 <table class="ct">
 <tr><th>Regimen</th><th>Evidence</th><th>Notes</th></tr>
-<tr><td class="reg">DTG + TAF/FTC or TDF/FTC (PREFERRED)</td><td>AI</td><td>Best efficacy + tolerability; DTG recommended throughout pregnancy including T1</td></tr>
 <tr><td class="reg">BIC/TAF/FTC — Biktarvy® (PREFERRED)</td><td>AI</td><td>Now a preferred option per June 2025 Perinatal Guidelines. Accumulating safety data supports use throughout pregnancy including T1. Single tablet once daily — may be preferred for adherence/simplicity.</td></tr>
+<tr><td class="reg">DTG + TAF/FTC or TDF/FTC (PREFERRED)</td><td>AI</td><td>Best efficacy + tolerability; DTG approved in pregnancy including T1 — see below</td></tr>
 <tr><td class="reg">DTG + TDF/3TC</td><td>AI</td><td>TDF/3TC alternative to FTC</td></tr>
 <tr><td class="reg">RAL + TDF/FTC</td><td>AI</td><td>Established safety data; more pills; acceptable alternative</td></tr>
 <tr><td class="reg">DRV/r + TDF/FTC (avoid COBI)</td><td>BI</td><td>Use ritonavir-boosted DRV — COBI levels fall in T2/T3 → subtherapeutic DRV</td></tr>
@@ -832,7 +832,7 @@ CVD concern → avoid ABC (↑MI signal); prefer TDF over TAF (better lipids)</l
 &lt;100 + Toxo IgG+ → TMP-SMX also covers toxoplasmosis<br>
 &lt;50 → MAC prophylaxis (azithromycin weekly) ONLY if ART cannot start promptly<br>
 Any CD4 + IGRA/TST+ → treat LTBI (regimen per ARV interactions)</li>
-<li><strong>Pregnancy:</strong> ART immediately regardless of trimester. Preferred: DTG + TDF/TAF + FTC/3TC <em>or</em> BIC/TAF/FTC (Biktarvy® — now preferred per Jun 2025 Perinatal Guidelines). DTG and BIC both recommended throughout pregnancy including T1. Avoid COBI, EFV in T1. VL at 36 weeks guides mode of delivery. Infant prophylaxis within 4–6 hours of birth.</li>
+<li><strong>Pregnancy:</strong> ART immediately regardless of trimester. Preferred: BIC/TAF/FTC (Biktarvy®) or DTG + TDF/TAF + FTC/3TC. Both now recommended throughout pregnancy including T1. Avoid COBI, EFV in T1. VL at 36 weeks guides mode of delivery. Infant prophylaxis within 4–6 hours of birth.</li>
 <li><strong>IRIS:</strong> Any active OI + ART initiation → IRIS risk. Don't stop ART. Treat the OI. Steroids for moderate–severe TB-IRIS. LP for CM-IRIS ICP. Highest mortality in cryptococcal IRIS.</li>
 <li><strong>CV/Metabolic:</strong> REPRIEVE trial → pitavastatin for primary prevention even at low 10-year ASCVD risk. Weight gain signal with INSTIs (especially DTG) + TAF. TAF → worse bone/renal vs. TDF. Monitor DXA at 50+ years. HbA1c unreliable for DM diagnosis on ART.</li>
 <li><strong>Monitor viral load:</strong> 4–8 weeks post-start → target &lt;50 copies/mL. Then q3–6 months stable. Failure = VL &gt;200 confirmed. Blips (50–200) do not require regimen change automatically.</li>
