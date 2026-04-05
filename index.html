@@ -169,11 +169,11 @@ display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap
 <div class="nav-wrap" id="nav"></div>
 <div id="panels"></div>
 <div class="footer">
-<span>&#169; Developed by <strong>Saad Alharbi</strong> &amp; <strong>Meshail Alharbi</strong> &middot; Phalsalhi@gmail.com</span>
+<span>&#169; Developed by <strong>Saad Alharbi</strong> &amp; <strong>Meshail Alharbi</strong> &middot; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="83d3ebe2eff0e2efebeac3e4eee2eaefade0ecee">[email&#160;protected]</a></span>
 <span>HIV Clinical Reference &middot; Based on HHS/NIH Guidelines</span>
 </div>
 </div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const steps=[
 {id:0,cat:'cat-dx',badge:'Baseline',bc:'b-gray',title:'Baseline evaluation & workup',sub:'Confirm diagnosis · Initial labs · Social & STI screening',content:`
 <div class="wb blue"><strong>What is HIV?</strong> Human Immunodeficiency Virus (HIV) is a retrovirus that infects and depletes CD4+ T-lymphocytes, progressively impairing cell-mediated immunity. Untreated, it leads to Acquired Immunodeficiency Syndrome (AIDS) — defined by CD4 &lt;200 cells/µL or an AIDS-defining illness. HIV is transmitted via sexual contact, blood exposure, and vertical (mother-to-child) transmission. HIV-1 is the predominant global strain; HIV-2 is less pathogenic and intrinsically NNRTI-resistant. With early and consistent ART, people living with HIV can achieve a near-normal life expectancy and carry effectively zero risk of sexual transmission when maintaining a suppressed viral load—defined as fewer than 50 copies per milliliter (U=U: Undetectable = Untransmittable).</div>
@@ -908,10 +908,6 @@ Capsid inhibitor — different resistance profile than INSTI
 • SC LEN: CYP3A4/P-gp inducers reduce levels (mnemonic <strong>COPPER</strong>: Carbamazepine, Oxcarbazepine, Phenobarbital, Phenytoin, Enzalutamide, Rifampin)<br>
 • SC LEN increases levels of: GHB, ketamine, benzodiazepines, fentanyl, PDE5 inhibitors
 </div></div>
-<div class="card acc-gray"><div class="cl">CAB LA: caution</div><div class="cv">
-Silicone/implants in buttocks/hips → may impair CAB LA absorption<br>
-Consider alternative injection site or alternative PrEP
-</div></div>
 </div></div>
 </div>
 
@@ -1642,14 +1638,4 @@ document.getElementById(id).classList.add('active');
 
 function showSub2(btn,id){
 const parent=btn.closest('.sp');
-parent.querySelectorAll('.stab2').forEach(t=>t.classList.remove('active'));
-btn.classList.add('active');
-parent.querySelectorAll('.sp2').forEach(p=>p.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-}
-
-buildNav();
-buildPanels();
-</script>
-</body>
-</html>
+parent.querySelectorAll('.stab2').forEach(t=>t.classList.
